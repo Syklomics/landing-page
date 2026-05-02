@@ -47,7 +47,6 @@ export default function Footer() {
                 <li><a href="#platform">Platform</a></li>
                 <li><a href="#science">Science</a></li>
                 <li><a href="#team">Founders</a></li>
-                <li><a href="#roadmap">Roadmap</a></li>
               </ul>
             </div>
             <div className="footer-col">

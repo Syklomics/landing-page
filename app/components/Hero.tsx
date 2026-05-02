@@ -20,7 +20,7 @@ export default function Hero() {
 
       <div className="hero-inner">
         <div className="hero-eyebrow">
-          Syklomics Biotechnology · Hemoglobinopathy · Drug Discovery · AI Platform
+          Syklomics Biotechnology · Hemoglobinopathy · Drug Discovery
         </div>
 
         <h1 className="hero-headline">
@@ -30,7 +30,7 @@ export default function Hero() {
         </h1>
 
         <p className="hero-sub">
-          A multi-omics driven AI platform accelerating therapy development for sickle cell disease — built by
+          A multi-omics platform accelerating therapy development for sickle cell disease — built by
           someone who lives with it.
         </p>
 
@@ -54,8 +54,8 @@ export default function Hero() {
           <div className="hs-label">Faster to market via repurposing</div>
         </div>
         <div className="hero-stat">
-          <div className="hs-num">505(b)(2)</div>
-          <div className="hs-label">Abbreviated FDA approval pathway</div>
+          <div className="hs-num">60%</div>
+          <div className="hs-label">Cost reduction via repurposing</div>
         </div>
       </div>
     </header>

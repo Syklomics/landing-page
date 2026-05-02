@@ -28,7 +28,7 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "Syklomics Biotechnology — Precision Drug Discovery for Hemoglobinopathies",
   description:
-    "A multi-omics driven AI platform accelerating therapy development for sickle cell disease — built by someone who lives with it.",
+    "A multi-omics platform accelerating therapy development for sickle cell disease — built by someone who lives with it.",
 };
 
 export default function RootLayout({

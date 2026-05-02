@@ -12,7 +12,7 @@ export default function Platform() {
           </div>
           <p className="section-body reveal reveal-delay-2">
             Syklomics integrates genomics, proteomics, and metabolomics into a unified biological map of
-            hemoglobinopathy — then uses AI to identify repurposing candidates with precision no single data
+            hemoglobinopathy — then surfaces repurposing candidates with precision no single data
             source can match.
           </p>
         </div>
@@ -31,7 +31,7 @@ export default function Platform() {
             <div className="pcard-num">02</div>
             <div className="pcard-title">Novel Drug Design</div>
             <div className="pcard-body">
-              Where no suitable compound exists, generative AI models design new compounds for identified
+              Where no suitable compound exists, generative models design new compounds for identified
               biological targets — extending the platform beyond the existing pharmacopoeia.
             </div>
           </div>

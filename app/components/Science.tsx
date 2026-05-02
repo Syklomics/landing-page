@@ -13,10 +13,10 @@ export default function Science() {
             <div className="omics-num">01</div>
             <div className="omics-title">Genomics</div>
             <div className="omics-body">
-              Identifies not just the primary HBB mutation but genetic modifiers and variants that influence
+              Identifies not just the primary mutation but genetic modifiers and variants that influence
               disease severity — the foundation of every patient profile.
             </div>
-            <div className="omics-tag">HBB · Variants · Modifiers</div>
+            <div className="omics-tag">Mutation · Variants · Modifiers</div>
           </div>
 
           <div className="omics-card reveal reveal-delay-2">

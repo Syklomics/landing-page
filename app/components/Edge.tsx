@@ -41,7 +41,7 @@ export default function Edge() {
             <div className="diff-title">Repurposing First</div>
             <div className="diff-body">
               Novel drug design means a decade to market minimum. Our repurposing-first strategy leverages
-              existing safety profiles, abbreviated Phase I trials, and the 505(b)(2) FDA pathway — putting
+              existing safety profiles, abbreviated Phase I trials, and accelerated FDA pathways — putting
               validated candidates in patients&apos; hands years faster.
             </div>
             <div className="diff-vs">

@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Syklomics Biotechnology — Precision Drug Discovery for Hemoglobinopathies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Outfit:wght@200;300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════ */
+:root {
+  --burg-deep:   #3D0D1E;
+  --burg:        #5C1A2E;
+  --burg-mid:    #7B2D42;
+  --burg-lite:   #9B3D55;
+  --rose:        #C46F84;
+  --blush:       #E8B4C0;
+  --petal:       #F5DDE3;
+  --cream:       #FBF7F5;
+  --warm-white:  #FEFCFB;
+  --ink:         #2A1018;
+  --muted:       #9A7A84;
+  --border:      #EDD8DC;
+
+  --ff-display: 'Outfit', sans-serif;
+  --ff-serif:   'Cormorant Garamond', serif;
+  --ff-body:    'DM Sans', sans-serif;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+/* ═══════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--warm-white);
+  color: var(--ink);
+  font-family: var(--ff-body);
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* custom cursor */
+.cursor {
+  position: fixed;
+  width: 10px; height: 10px;
+  background: var(--burg);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s var(--ease-out), opacity 0.2s;
+  transform: translate(-50%, -50%);
+}
+.cursor-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(92,26,46,0.35);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transition: transform 0.35s var(--ease-out), width 0.3s, height 0.3s, opacity 0.2s;
+  transform: translate(-50%, -50%);
+}
+body:hover .cursor { opacity: 1; }
+
+a, button { cursor: none; }
+
+/* ═══════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0 56px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s;
+}
+nav.scrolled {
+  background: rgba(253,252,251,0.92);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 1px 0 var(--border);
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+.nav-wordmark {
+  font-family: var(--ff-display);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--burg-deep);
+  line-height: 1;
+}
+.nav-wordmark .nw-light { font-weight: 300; color: var(--burg-mid); }
+.nav-wordmark .nw-bold  { font-weight: 800; }
+.nav-wordmark .nw-semi  { font-weight: 600; color: var(--burg-lite); }
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--burg); }
+
+.nav-cta {
+  padding: 10px 22px;
+  background: var(--burg);
+  color: var(--petal) !important;
+  border-radius: 2px;
+  font-size: 11px !important;
+  letter-spacing: 0.15em !important;
+  transition: background 0.2s !important;
+}
+.nav-cta:hover { background: var(--burg-deep) !important; color: var(--petal) !important; }
+
+/* mobile nav toggle */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+.nav-toggle span {
+  display: block;
+  width: 22px; height: 1.5px;
+  background: var(--burg);
+  transition: 0.3s;
+}
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(155deg, #2A0810 0%, #3D0D1E 30%, #5C1A2E 60%, #7B2D42 85%, #9B3D55 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 56px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* animated grain */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  width: 200%; height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  opacity: 0.4;
+  pointer-events: none;
+  animation: grain 8s steps(10) infinite;
+}
+@keyframes grain {
+  0%,100% { transform: translate(0,0); }
+  10% { transform: translate(-2%,-3%); }
+  20% { transform: translate(2%,2%); }
+  30% { transform: translate(-1%,3%); }
+  40% { transform: translate(3%,-1%); }
+  50% { transform: translate(-3%,1%); }
+  60% { transform: translate(1%,-2%); }
+  70% { transform: translate(-2%,3%); }
+  80% { transform: translate(2%,1%); }
+  90% { transform: translate(-1%,-2%); }
+}
+
+/* floating RBC cells */
+.hero-cells {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.rbc-float {
+  position: absolute;
+  border-radius: 50%;
+  animation: floatCell linear infinite;
+  opacity: 0;
+}
+
+@keyframes floatCell {
+  0%   { opacity: 0; transform: translateY(10px) scale(0.9) rotate(0deg); }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-60px) scale(1.05) rotate(20deg); }
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--blush);
+  opacity: 0.7;
+  margin-bottom: 36px;
+  animation: fadeUp 1s var(--ease-out) 0.2s both;
+}
+
+.hero-headline {
+  font-family: var(--ff-display);
+  font-size: clamp(46px, 6.5vw, 96px);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  color: var(--petal);
+  margin-bottom: 12px;
+  animation: fadeUp 1s var(--ease-out) 0.35s both;
+}
+
+.hero-headline .hl-thin { font-weight: 200; color: rgba(245,221,227,0.55); }
+.hero-headline .hl-accent {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--blush);
+}
+
+.hero-sub {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: clamp(18px, 2.2vw, 26px);
+  font-weight: 300;
+  color: rgba(245,221,227,0.55);
+  margin-bottom: 52px;
+  animation: fadeUp 1s var(--ease-out) 0.5s both;
+  max-width: 600px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  animation: fadeUp 1s var(--ease-out) 0.65s both;
+}
+
+.btn-primary {
+  padding: 16px 36px;
+  background: var(--petal);
+  color: var(--burg-deep);
+  font-family: var(--ff-display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  transition: background 0.25s, transform 0.2s;
+  display: inline-block;
+}
+.btn-primary:hover { background: #fff; transform: translateY(-2px); }
+
+.btn-ghost {
+  padding: 15px 32px;
+  border: 1px solid rgba(245,221,227,0.3);
+  color: rgba(245,221,227,0.7);
+  font-family: var(--ff-display);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: border-color 0.25s, color 0.25s, transform 0.2s;
+  display: inline-block;
+}
+.btn-ghost:hover { border-color: var(--blush); color: var(--petal); transform: translateY(-2px); }
+
+/* hero bottom stats bar */
+.hero-stats {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 2;
+  display: flex;
+  border-top: 1px solid rgba(245,221,227,0.1);
+  animation: fadeUp 1s var(--ease-out) 0.8s both;
+}
+
+.hero-stat {
+  flex: 1;
+  padding: 24px 40px;
+  border-right: 1px solid rgba(245,221,227,0.08);
+}
+.hero-stat:last-child { border-right: none; }
+
+.hs-num {
+  font-family: var(--ff-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--blush);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.hs-label {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(245,221,227,0.35);
+}
+
+/* hero RBC illustration */
+.hero-rbc-large {
+  position: absolute;
+  right: -60px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.08;
+  animation: fadeUp 1.5s var(--ease-out) 0.4s both, rotateSlow 20s linear infinite;
+  pointer-events: none;
+}
+@keyframes rotateSlow {
+  from { transform: translateY(-50%) rotate(0deg); }
+  to   { transform: translateY(-50%) rotate(360deg); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════
+   SECTION BASE
+═══════════════════════════════════════ */
+section {
+  padding: 120px 56px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-wrap { padding: 120px 56px; }
+.section-wrap.bg-cream { background: var(--cream); }
+.section-wrap.bg-burg  { background: var(--burg-deep); }
+.section-wrap.bg-petal { background: var(--petal); }
+
+.section-inner { max-width: 1200px; margin: 0 auto; }
+
+.section-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::before {
+  content: '';
+  display: block;
+  width: 28px; height: 1px;
+  background: var(--rose);
+  flex-shrink: 0;
+}
+
+.section-title {
+  font-family: var(--ff-display);
+  font-size: clamp(32px, 4vw, 54px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+  color: var(--ink);
+}
+
+.section-title .t-light {
+  font-weight: 200;
+  color: var(--muted);
+}
+.section-title .t-italic {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--burg-mid);
+}
+
+.section-body {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: #5A3842;
+  max-width: 560px;
+}
+
+/* ═══════════════════════════════════════
+   PROBLEM SECTION
+═══════════════════════════════════════ */
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  margin-top: 72px;
+}
+
+.problem-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+}
+
+.problem-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid;
+  animation: pulseRing 3s ease-in-out infinite;
+}
+@keyframes pulseRing {
+  0%,100% { opacity: 0.15; transform: scale(1); }
+  50%      { opacity: 0.35; transform: scale(1.03); }
+}
+
+.problem-stats-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 48px;
+}
+
+.pstat {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+.pstat:first-child { border-top: 1px solid var(--border); }
+
+.pstat-num {
+  font-family: var(--ff-display);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--burg);
+  letter-spacing: -0.025em;
+  line-height: 1;
+  width: 100px;
+  flex-shrink: 0;
+}
+
+.pstat-text {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1.6;
+  padding-top: 6px;
+}
+.pstat-text strong { font-weight: 600; color: var(--burg-deep); }
+
+/* ═══════════════════════════════════════
+   PLATFORM SECTION
+═══════════════════════════════════════ */
+.platform-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 72px;
+}
+
+.platform-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.pcard {
+  padding: 44px 36px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
+}
+.pcard::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--burg) 0%, var(--rose) 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-out);
+}
+.pcard:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(92,26,46,0.1); }
+.pcard:hover::before { transform: scaleX(1); }
+
+.pcard-icon {
+  margin-bottom: 24px;
+}
+
+.pcard-num {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--border);
+  line-height: 1;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+
+.pcard-title {
+  font-family: var(--ff-display);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--burg-deep);
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.pcard-body {
+  font-size: 13px;
+  font-weight: 300;
+  color: #6A4850;
+  line-height: 1.75;
+}
+
+/* ═══════════════════════════════════════
+   SCIENCE / APPROACH
+═══════════════════════════════════════ */
+.science-wrap {
+  background: var(--burg-deep);
+  padding: 120px 56px;
+}
+
+.science-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.science-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--rose);
+  opacity: 0.7;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.science-label::before {
+  content: '';
+  display: block;
+  width: 28px; height: 1px;
+  background: var(--rose);
+}
+
+.science-title {
+  font-family: var(--ff-display);
+  font-size: clamp(32px, 4vw, 54px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--petal);
+  line-height: 1.08;
+  margin-bottom: 72px;
+}
+.science-title .st-light { font-weight: 200; color: rgba(245,221,227,0.4); }
+
+.omics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-bottom: 72px;
+}
+
+.omics-card {
+  padding: 44px 36px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(245,221,227,0.08);
+  position: relative;
+  transition: background 0.3s;
+}
+.omics-card:hover { background: rgba(255,255,255,0.07); }
+
+.omics-num {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 52px;
+  font-weight: 300;
+  color: rgba(196,111,132,0.25);
+  line-height: 1;
+  margin-bottom: 20px;
+}
+
+.omics-title {
+  font-family: var(--ff-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--blush);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.omics-body {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(245,221,227,0.5);
+  line-height: 1.75;
+}
+
+.omics-tag {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 5px 12px;
+  border: 1px solid rgba(196,111,132,0.3);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rose);
+}
+
+.science-quote {
+  border-left: 3px solid var(--burg-lite);
+  padding: 32px 44px;
+  background: rgba(255,255,255,0.03);
+}
+.science-quote p {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: clamp(18px, 2.2vw, 26px);
+  font-weight: 300;
+  color: rgba(245,221,227,0.7);
+  line-height: 1.5;
+}
+.science-quote cite {
+  display: block;
+  margin-top: 16px;
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(196,111,132,0.5);
+}
+
+/* ═══════════════════════════════════════
+   DIFFERENTIATORS
+═══════════════════════════════════════ */
+.diff-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 64px;
+}
+
+.diff-card {
+  padding: 52px 48px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  position: relative;
+}
+
+.diff-card.featured {
+  background: var(--burg);
+  border-color: transparent;
+}
+
+.diff-index {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 64px;
+  font-weight: 300;
+  color: var(--border);
+  line-height: 1;
+  margin-bottom: 24px;
+}
+.diff-card.featured .diff-index { color: rgba(245,221,227,0.15); }
+
+.diff-title {
+  font-family: var(--ff-display);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--burg-deep);
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+.diff-card.featured .diff-title { color: var(--petal); }
+
+.diff-body {
+  font-size: 14px;
+  font-weight: 300;
+  color: #5A3842;
+  line-height: 1.8;
+}
+.diff-card.featured .diff-body { color: rgba(245,221,227,0.6); }
+
+.diff-vs {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--muted);
+}
+.diff-card.featured .diff-vs {
+  border-color: rgba(245,221,227,0.15);
+  color: rgba(245,221,227,0.4);
+}
+
+/* ═══════════════════════════════════════
+   FOUNDERS / TEAM
+═══════════════════════════════════════ */
+.team-wrap {
+  background: var(--petal);
+  padding: 120px 56px;
+}
+
+.founders-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  margin-top: 64px;
+}
+
+.founder-card {
+  background: var(--warm-white);
+  padding: 56px 48px;
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s var(--ease-out);
+}
+.founder-card:hover { transform: translateY(-4px); }
+
+.founder-avatar {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--burg-mid), var(--rose));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+  font-family: var(--ff-display);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--petal);
+  letter-spacing: -0.02em;
+}
+
+.founder-name {
+  font-family: var(--ff-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--burg-deep);
+  letter-spacing: -0.015em;
+  margin-bottom: 4px;
+}
+
+.founder-role {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 24px;
+}
+
+.founder-bio {
+  font-size: 14px;
+  font-weight: 300;
+  color: #5A3842;
+  line-height: 1.8;
+}
+
+.founder-quote {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--burg-mid);
+  line-height: 1.6;
+}
+
+.founder-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--burg) 0%, var(--rose) 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-out);
+}
+.founder-card:hover::after { transform: scaleX(1); }
+
+/* ═══════════════════════════════════════
+   ROADMAP / TIMELINE
+═══════════════════════════════════════ */
+.timeline {
+  position: relative;
+  padding-left: 48px;
+  margin-top: 64px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 8px; bottom: 8px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--burg) 0%, var(--border) 100%);
+}
+
+.t-event {
+  position: relative;
+  margin-bottom: 52px;
+}
+.t-event:last-child { margin-bottom: 0; }
+
+.t-dot {
+  position: absolute;
+  left: -42px;
+  top: 5px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--burg);
+  border: 2px solid var(--cream);
+  box-shadow: 0 0 0 1px var(--burg);
+}
+.t-event.future .t-dot {
+  background: var(--border);
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+.t-phase {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 8px;
+}
+.t-event.future .t-phase { color: var(--muted); }
+
+.t-title {
+  font-family: var(--ff-display);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--burg-deep);
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+
+.t-body {
+  font-size: 14px;
+  font-weight: 300;
+  color: #5A3842;
+  line-height: 1.7;
+  max-width: 520px;
+}
+
+.t-cost {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 4px 12px;
+  background: var(--petal);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--burg);
+  letter-spacing: 0.06em;
+}
+
+/* ═══════════════════════════════════════
+   CONTACT / CTA
+═══════════════════════════════════════ */
+.cta-wrap {
+  background: linear-gradient(145deg, #2A0810 0%, #3D0D1E 50%, #5C1A2E 100%);
+  padding: 140px 56px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(196,111,132,0.1) 0%, transparent 65%);
+}
+
+.cta-label {
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--blush);
+  opacity: 0.5;
+  margin-bottom: 28px;
+  position: relative;
+}
+
+.cta-title {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: clamp(32px, 4.5vw, 60px);
+  font-weight: 300;
+  color: var(--petal);
+  line-height: 1.3;
+  margin-bottom: 20px;
+  position: relative;
+}
+.cta-title em {
+  font-style: normal;
+  font-family: var(--ff-display);
+  font-weight: 700;
+  color: var(--blush);
+}
+
+.cta-body {
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(245,221,227,0.5);
+  max-width: 480px;
+  margin: 0 auto 48px;
+  line-height: 1.8;
+  position: relative;
+}
+
+.cta-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  position: relative;
+}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer {
+  background: var(--burg-deep);
+  padding: 56px 56px 40px;
+  border-top: 1px solid rgba(245,221,227,0.08);
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 48px;
+  gap: 40px;
+}
+
+.footer-logo-area { max-width: 300px; }
+
+.footer-wordmark {
+  font-family: var(--ff-display);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--petal);
+  margin-bottom: 12px;
+}
+.fw-light { font-weight: 300; color: rgba(245,221,227,0.5); }
+.fw-semi  { font-weight: 600; color: rgba(232,180,192,0.8); }
+
+.footer-tagline {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(245,221,227,0.4);
+  line-height: 1.6;
+}
+
+.footer-links {
+  display: flex;
+  gap: 64px;
+}
+
+.footer-col h4 {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(245,221,227,0.3);
+  margin-bottom: 20px;
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-col a {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(245,221,227,0.55);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--blush); }
+
+.footer-bottom {
+  padding-top: 32px;
+  border-top: 1px solid rgba(245,221,227,0.07);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-copy {
+  font-size: 11px;
+  color: rgba(245,221,227,0.25);
+  letter-spacing: 0.06em;
+}
+
+.footer-locs {
+  font-size: 11px;
+  color: rgba(245,221,227,0.25);
+  letter-spacing: 0.06em;
+}
+
+/* ═══════════════════════════════════════
+   DIVIDER
+═══════════════════════════════════════ */
+.divider {
+  height: 1px;
+  background: var(--border);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 900px) {
+  nav { padding: 0 28px; }
+  .nav-links { display: none; }
+  .nav-links.open { 
+    display: flex; flex-direction: column;
+    position: fixed; top: 68px; left: 0; right: 0;
+    background: var(--warm-white);
+    padding: 24px 28px;
+    border-bottom: 1px solid var(--border);
+    gap: 20px;
+    z-index: 99;
+  }
+  .nav-toggle { display: flex; }
+
+  .hero { padding: 100px 28px 80px; }
+  .hero-stats { display: none; }
+  .hero-rbc-large { display: none; }
+  .hero-headline { font-size: 42px; }
+
+  section { padding: 80px 28px; }
+  .section-wrap { padding: 80px 28px; }
+
+  .problem-grid { grid-template-columns: 1fr; gap: 40px; }
+  .problem-visual { display: none; }
+  .platform-header { grid-template-columns: 1fr; gap: 32px; }
+  .platform-cards { grid-template-columns: 1fr; }
+  .omics-grid { grid-template-columns: 1fr; }
+  .diff-grid { grid-template-columns: 1fr; }
+  .founders-grid { grid-template-columns: 1fr; }
+  .footer-top { flex-direction: column; }
+  .footer-links { flex-direction: column; gap: 32px; }
+  .cta-actions { flex-direction: column; align-items: center; }
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ══════════════════════════
+     NAV
+══════════════════════════ -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <!-- RBC icon -->
+    <svg width="32" height="32" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="40" cy="40" rx="32" ry="20" fill="url(#navG)"/>
+      <ellipse cx="40" cy="40" rx="14" ry="7" fill="rgba(30,5,12,0.55)"/>
+      <ellipse cx="40" cy="40" rx="34" ry="22" fill="none" stroke="rgba(92,26,46,0.2)" stroke-width="1"/>
+      <defs>
+        <radialGradient id="navG" cx="38%" cy="36%" r="62%" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="80" y2="80">
+          <stop offset="0%"   stop-color="#C46F84"/>
+          <stop offset="55%"  stop-color="#7B2D42"/>
+          <stop offset="100%" stop-color="#5C1A2E"/>
+        </radialGradient>
+      </defs>
+    </svg>
+    <div style="display:flex;flex-direction:column;gap:1px;">
+      <div class="nav-wordmark">
+        <span class="nw-light">Sy</span><span class="nw-bold">k</span><span class="nw-light">lo</span><span class="nw-semi">mics</span>
+      </div>
+      <div style="font-family:var(--ff-body);font-size:8px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);line-height:1;">Biotechnology</div>
+    </div>
+  </a>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#platform">Platform</a></li>
+    <li><a href="#science">Science</a></li>
+    <li><a href="#differentiation">Edge</a></li>
+    <li><a href="#team">Founders</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+
+<!-- ══════════════════════════
+     HERO
+══════════════════════════ -->
+<header class="hero" id="home">
+
+  <!-- floating cells -->
+  <div class="hero-cells" id="heroCells"></div>
+
+  <!-- large decorative RBC -->
+  <div class="hero-rbc-large">
+    <svg width="600" height="600" viewBox="0 0 80 80" fill="none">
+      <ellipse cx="40" cy="40" rx="32" ry="20" fill="url(#heroRbcG)"/>
+      <ellipse cx="40" cy="40" rx="14" ry="7" fill="rgba(30,5,12,0.4)"/>
+      <defs>
+        <radialGradient id="heroRbcG" cx="38%" cy="36%" r="62%" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="80" y2="80">
+          <stop offset="0%" stop-color="#C46F84"/>
+          <stop offset="100%" stop-color="#5C1A2E"/>
+        </radialGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Syklomics Biotechnology · Hemoglobinopathy · Drug Discovery · AI Platform</div>
+
+    <h1 class="hero-headline">
+      Drug discovery,<br>
+      <span class="hl-thin">finally</span><br>
+      <span class="hl-accent">intentional.</span>
+    </h1>
+
+    <p class="hero-sub">
+      A multi-omics driven AI platform accelerating therapy development for sickle cell disease — built by someone who lives with it.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#platform" class="btn-primary">Explore the Platform</a>
+      <a href="#science" class="btn-ghost">Our Science</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hs-num">100M+</div>
+      <div class="hs-label">People with hemoglobinopathies</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hs-num">50M+</div>
+      <div class="hs-label">Affected by sickle cell globally</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hs-num">3–5×</div>
+      <div class="hs-label">Faster to market via repurposing</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hs-num">505(b)(2)</div>
+      <div class="hs-label">Abbreviated FDA approval pathway</div>
+    </div>
+  </div>
+</header>
+
+
+<!-- ══════════════════════════
+     PROBLEM
+══════════════════════════ -->
+<div class="section-wrap">
+<section id="problem">
+  <div class="section-label reveal">The Problem</div>
+
+  <div class="problem-grid">
+    <div>
+      <h2 class="section-title reveal reveal-delay-1">
+        Drug discovery is<br>
+        <span class="t-light">slow, expensive,</span><br>
+        <span class="t-italic">and not intentional.</span>
+      </h2>
+      <br>
+      <p class="section-body reveal reveal-delay-2">
+        The current gold standard for sickle cell disease — Hydroxyurea — was an accidental discovery originally developed for cancer. It took decades to reach SCD patients. We asked: what if this process were deliberate?
+      </p>
+    </div>
+
+    <div>
+      <div class="problem-stats-list">
+        <div class="pstat reveal reveal-delay-2">
+          <div class="pstat-num">20yr</div>
+          <div class="pstat-text"><strong>Average timeline</strong> from drug discovery to patient access — a timeline SCD patients simply cannot afford.</div>
+        </div>
+        <div class="pstat reveal reveal-delay-3">
+          <div class="pstat-num">$2.6B</div>
+          <div class="pstat-text"><strong>Average cost</strong> to bring a novel drug to market. Repurposing can cut this by up to 60%.</div>
+        </div>
+        <div class="pstat reveal reveal-delay-4">
+          <div class="pstat-num">&lt;25%</div>
+          <div class="pstat-text"><strong>Of affected patients</strong> are adequately served by current treatments due to differential drug response.</div>
+        </div>
+        <div class="pstat reveal reveal-delay-5">
+          <div class="pstat-num">#1</div>
+          <div class="pstat-text"><strong>Nigeria</strong> carries the highest global burden of SCD — and is at the centre of our data strategy.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+
+<!-- ══════════════════════════
+     PLATFORM
+══════════════════════════ -->
+<div class="section-wrap bg-cream" id="platform">
+<section>
+  <div class="platform-header">
+    <div>
+      <div class="section-label reveal">The Platform</div>
+      <h2 class="section-title reveal reveal-delay-1">
+        Three layers.<br>
+        <span class="t-italic">One map.</span>
+      </h2>
+    </div>
+    <p class="section-body reveal reveal-delay-2">
+      Syklomics integrates genomics, proteomics, and metabolomics into a unified biological map of hemoglobinopathy — then uses AI to identify repurposing candidates with precision no single data source can match.
+    </p>
+  </div>
+
+  <div class="platform-cards">
+
+    <div class="pcard reveal reveal-delay-1">
+      <div class="pcard-num">01</div>
+      <div class="pcard-title">Drug Repurposing</div>
+      <div class="pcard-body">Our core approach. We identify FDA-approved drugs whose mechanism of action overlaps with biological targets from our multi-omics data — compressing years of discovery into months.</div>
+    </div>
+
+    <div class="pcard reveal reveal-delay-2">
+      <div class="pcard-num">02</div>
+      <div class="pcard-title">Novel Drug Design</div>
+      <div class="pcard-body">Where no suitable compound exists, generative AI models design new compounds for identified biological targets — extending the platform beyond the existing pharmacopoeia.</div>
+    </div>
+
+    <div class="pcard reveal reveal-delay-3">
+      <div class="pcard-num">03</div>
+      <div class="pcard-title">Biomarker Discovery</div>
+      <div class="pcard-body">Our longitudinal patient dataset surfaces predictors of drug response and complication risk — creating licensing value for pharma partners and companion diagnostic developers.</div>
+    </div>
+
+  </div>
+</section>
+</div>
+
+
+<!-- ══════════════════════════
+     SCIENCE
+══════════════════════════ -->
+<div class="science-wrap" id="science">
+<div class="science-inner">
+  <div class="science-label reveal">The Science</div>
+  <h2 class="science-title reveal reveal-delay-1">
+    Beyond the mutation.<br>
+    <span class="st-light">The full biological network.</span>
+  </h2>
+
+  <div class="omics-grid">
+
+    <div class="omics-card reveal reveal-delay-1">
+      <div class="omics-num">01</div>
+      <div class="omics-title">Genomics</div>
+      <div class="omics-body">Identifies not just the primary HBB mutation but genetic modifiers and variants that influence disease severity — the foundation of every patient profile.</div>
+      <div class="omics-tag">HBB · Variants · Modifiers</div>
+    </div>
+
+    <div class="omics-card reveal reveal-delay-2">
+      <div class="omics-num">02</div>
+      <div class="omics-title">Proteomics</div>
+      <div class="omics-body">Reveals how the mutation alters protein expression and interaction networks — exposing dysfunctional pathways that genomics alone cannot identify.</div>
+      <div class="omics-tag">Protein networks · Pathways</div>
+    </div>
+
+    <div class="omics-card reveal reveal-delay-3">
+      <div class="omics-num">03</div>
+      <div class="omics-title">Metabolomics</div>
+      <div class="omics-body">Captures the metabolic signature of the disease — oxidative stress markers, inflammatory mediators, and red blood cell energy metabolism between patients of different severity.</div>
+      <div class="omics-tag">Metabolism · Inflammation</div>
+    </div>
+
+  </div>
+
+  <div class="science-quote reveal">
+    <p>"Hydroxyurea took decades to reach SCD patients. It was an accidental discovery. Our platform exists to make that process deliberate, data-driven, and fast."</p>
+    <cite>Fatima Oyawoye, CEO &amp; Co-founder</cite>
+  </div>
+</div>
+</div>
+
+
+<!-- ══════════════════════════
+     DIFFERENTIATION
+══════════════════════════ -->
+<div class="section-wrap" id="differentiation">
+<section>
+  <div class="section-label reveal">Our Edge</div>
+  <h2 class="section-title reveal reveal-delay-1">
+    What our competitors<br>
+    <span class="t-italic">don't have.</span>
+  </h2>
+
+  <div class="diff-grid">
+
+    <div class="diff-card featured reveal reveal-delay-1">
+      <div class="diff-index">01</div>
+      <div class="diff-title">Proprietary Longitudinal Dataset</div>
+      <div class="diff-body">A fully integrated, multi-omics database built specifically for hemoglobinopathy — capturing clinical severity, longitudinal history, treatment response, and full omics profiles on the same patients. This dataset does not exist anywhere in the world today.</div>
+      <div class="diff-vs">Healx, BenevolentAI, Recursion rely on public databases like GEO and UniProt — not disease-focused, lacking clinical depth.</div>
+    </div>
+
+    <div class="diff-card reveal reveal-delay-2">
+      <div class="diff-index">02</div>
+      <div class="diff-title">Multi-Omics, Not Just Genomics</div>
+      <div class="diff-body">Genomics shows where a mutation is. It doesn't show how it translates into disease. Our proteomics and metabolomics add two additional biological layers — revealing targets invisible to single-omic approaches.</div>
+      <div class="diff-vs">Most AI drug discovery companies are genomics-only. We go three layers deep.</div>
+    </div>
+
+    <div class="diff-card reveal reveal-delay-3">
+      <div class="diff-index">03</div>
+      <div class="diff-title">Repurposing First</div>
+      <div class="diff-body">Novel drug design means a decade to market minimum. Our repurposing-first strategy leverages existing safety profiles, abbreviated Phase I trials, and the 505(b)(2) FDA pathway — putting validated candidates in patients' hands years faster.</div>
+      <div class="diff-vs">Recursion and BenevolentAI are racing on novel compounds. We're already on a shorter track.</div>
+    </div>
+
+    <div class="diff-card reveal reveal-delay-4">
+      <div class="diff-index">04</div>
+      <div class="diff-title">Disease-First Founder Perspective</div>
+      <div class="diff-body">Our CEO has sickle cell disease and has spent a decade researching it. Our CTO brings the bioinformatics depth. The combination of lived experience, clinical research, and technical execution is extraordinarily rare in biotech.</div>
+      <div class="diff-vs">The best drug for SCD shouldn't come from someone who has never met a patient with it.</div>
+    </div>
+
+  </div>
+</section>
+</div>
+
+
+<!-- ══════════════════════════
+     FOUNDERS
+══════════════════════════ -->
+<div class="team-wrap" id="team">
+<div class="section-inner">
+  <div class="section-label reveal">The Founders</div>
+  <h2 class="section-title reveal reveal-delay-1">
+    Built by people<br>
+    <span class="t-italic">who live the mission.</span>
+  </h2>
+
+  <div class="founders-grid">
+
+    <div class="founder-card reveal reveal-delay-2">
+      <div class="founder-avatar">FO</div>
+      <div class="founder-name">Fatima Oyawoye</div>
+      <div class="founder-role">CEO · Co-founder · 50% Equity</div>
+      <div class="founder-bio">
+        PhD researcher with nearly a decade of experience in omics landscapes and hemoglobinopathy drug discovery. Fatima has sickle cell disease — giving her a perspective as patient, researcher, and community advocate that shapes every decision Syklomics makes.
+      </div>
+      <div class="founder-quote">
+        "I know what it means to wait for a drug that doesn't serve you. That's not an abstract problem for me — it's Tuesday."
+      </div>
+    </div>
+
+    <div class="founder-card reveal reveal-delay-3">
+      <div class="founder-avatar">PI</div>
+      <div class="founder-name">Pamilerin Idowu</div>
+      <div class="founder-role">CTO · Co-founder · 50% Equity</div>
+      <div class="founder-bio">
+        Full-stack bioinformatics engineer and the technical architect of Syklomics' platform. Pamilerin leads all engineering — from the multi-omics pipeline to the knowledge graph and AI model development. Known Fatima for 12 years, having studied together at undergraduate level.
+      </div>
+      <div class="founder-quote">
+        "The science is ready. The data infrastructure is buildable. What's missing is intentionality. That's what we're building."
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+
+<!-- ══════════════════════════
+     ROADMAP
+══════════════════════════ -->
+<div class="section-wrap" id="roadmap">
+<section>
+  <div class="section-label reveal">Roadmap</div>
+  <h2 class="section-title reveal reveal-delay-1">
+    From idea to<br>
+    <span class="t-italic">first candidates.</span>
+  </h2>
+
+  <div class="timeline">
+
+    <div class="t-event reveal">
+      <div class="t-dot"></div>
+      <div class="t-phase">Stage 1 · Months 1–6</div>
+      <div class="t-title">Foundation & Regulatory Groundwork</div>
+      <div class="t-body">Ethics and IRB approval in Nigeria (NHREC), facility setup, patient recruitment protocols, and platform construction on public omics datasets. Goal: 200 patients recruited and bioinformatics pipelines validated.</div>
+      <span class="t-cost">$300K – $400K</span>
+    </div>
+
+    <div class="t-event reveal">
+      <div class="t-dot"></div>
+      <div class="t-phase">Stage 2 · Months 7–18</div>
+      <div class="t-title">Proprietary Data Generation & Platform Training</div>
+      <div class="t-body">Full multi-omics profiling of 200 patients. Genomic sequencing in-house; proteomics and metabolomics via CRO partners. Platform retrained on our proprietary dataset. Sample bank built toward 5,000 patient target.</div>
+      <span class="t-cost">$450K – $600K</span>
+    </div>
+
+    <div class="t-event future reveal">
+      <div class="t-dot"></div>
+      <div class="t-phase">Stage 3 · Months 19–30</div>
+      <div class="t-title">First Candidates, Validation & Commercial Conversations</div>
+      <div class="t-body">Platform produces first ranked repurposing candidates. In vitro validation of top candidates. First co-development partnerships with pharma initiated. Data licensing conversations begin.</div>
+      <span class="t-cost">$350K – $450K</span>
+    </div>
+
+  </div>
+</section>
+</div>
+
+
+<!-- ══════════════════════════
+     CTA
+══════════════════════════ -->
+<div class="cta-wrap" id="contact">
+  <div class="cta-label reveal">Get Involved</div>
+  <h2 class="cta-title reveal reveal-delay-1">
+    The next SCD breakthrough<br>
+    won't happen <em>by accident.</em>
+  </h2>
+  <p class="cta-body reveal reveal-delay-2">
+    Whether you're a pharma partner, an investor, a clinician, or a patient — we want to hear from you. This platform is for the 100 million people living with hemoglobinopathies.
+  </p>
+  <div class="cta-actions reveal reveal-delay-3">
+    <a href="mailto:hello@syklomics.com" class="btn-primary">Contact Us</a>
+    <a href="#platform" class="btn-ghost">Learn More</a>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════
+     FOOTER
+══════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-logo-area">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+          <svg width="28" height="28" viewBox="0 0 80 80" fill="none">
+            <ellipse cx="40" cy="40" rx="32" ry="20" fill="url(#footG)"/>
+            <ellipse cx="40" cy="40" rx="14" ry="7" fill="rgba(30,5,12,0.55)"/>
+            <defs>
+              <radialGradient id="footG" cx="38%" cy="36%" r="62%" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="80" y2="80">
+                <stop offset="0%" stop-color="#C46F84"/><stop offset="100%" stop-color="#5C1A2E"/>
+              </radialGradient>
+            </defs>
+          </svg>
+          <div style="display:flex;flex-direction:column;gap:3px;">
+            <div class="footer-wordmark">
+              <span class="fw-light">Sy</span>k<span class="fw-light">lo</span><span class="fw-semi">mics</span>
+            </div>
+            <div style="font-family:var(--ff-body);font-size:9px;font-weight:400;letter-spacing:0.22em;text-transform:uppercase;color:rgba(245,221,227,0.3);line-height:1;">Biotechnology</div>
+          </div>
+        </div>
+        <div class="footer-tagline">Making drug discovery intentional — one omics layer at a time.</div>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#platform">Platform</a></li>
+            <li><a href="#science">Science</a></li>
+            <li><a href="#team">Founders</a></li>
+            <li><a href="#roadmap">Roadmap</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Partners</h4>
+          <ul>
+            <li><a href="#contact">Pharma Co-Development</a></li>
+            <li><a href="#contact">Data Licensing</a></li>
+            <li><a href="#contact">Clinical Sites</a></li>
+            <li><a href="#contact">Investors</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Syklomics Biotechnology Ltd. All rights reserved. Incorporated in Nigeria.</div>
+      <div class="footer-locs">Bristol, UK · Ibadan, Nigeria</div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════
+     SCRIPTS
+══════════════════════════ -->
+<script>
+// ── Custom cursor
+const cursor = document.getElementById('cursor');
+const ring   = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top  = my + 'px';
+});
+
+function animRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top  = ry + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(2)';
+    ring.style.width  = '52px';
+    ring.style.height = '52px';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+    ring.style.width  = '36px';
+    ring.style.height = '36px';
+  });
+});
+
+// ── Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ── Mobile nav
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+
+// ── Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(r => io.observe(r));
+
+// ── Floating RBC cells
+function makeRBC(container) {
+  const cell = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  const size = 30 + Math.random() * 80;
+  cell.setAttribute('width', size);
+  cell.setAttribute('height', size * 0.65);
+  cell.setAttribute('viewBox', '0 0 80 52');
+  cell.setAttribute('fill', 'none');
+  cell.innerHTML = `
+    <ellipse cx="40" cy="26" rx="38" ry="24" fill="url(#fc${Date.now()})"/>
+    <ellipse cx="40" cy="26" rx="16" ry="9" fill="rgba(20,3,10,0.35)"/>
+    <defs>
+      <radialGradient id="fc${Date.now()}" cx="40%" cy="38%" r="60%" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="80" y2="52">
+        <stop offset="0%" stop-color="#C46F84" stop-opacity="0.6"/>
+        <stop offset="100%" stop-color="#3D0D1E" stop-opacity="0.4"/>
+      </radialGradient>
+    </defs>
+  `;
+
+  const wrap = document.createElement('div');
+  wrap.className = 'rbc-float';
+  wrap.style.cssText = `
+    left: ${Math.random() * 100}%;
+    top: ${10 + Math.random() * 80}%;
+    animation-duration: ${8 + Math.random() * 10}s;
+    animation-delay: ${Math.random() * 8}s;
+    transform: rotate(${Math.random() * 30 - 15}deg);
+  `;
+  wrap.appendChild(cell);
+  container.appendChild(wrap);
+}
+
+const heroCells = document.getElementById('heroCells');
+for (let i = 0; i < 18; i++) makeRBC(heroCells);
+</script>
+
+</body>
+</html>

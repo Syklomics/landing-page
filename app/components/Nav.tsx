@@ -59,7 +59,6 @@ export default function Nav() {
         <li><a href="#science" onClick={() => setOpen(false)}>Science</a></li>
         <li><a href="#differentiation" onClick={() => setOpen(false)}>Edge</a></li>
         <li><a href="#team" onClick={() => setOpen(false)}>Founders</a></li>
-        <li><a href="#roadmap" onClick={() => setOpen(false)}>Roadmap</a></li>
         <li><a href="#contact" className="nav-cta" onClick={() => setOpen(false)}>Get in Touch</a></li>
       </ul>
 

@@ -20,7 +20,7 @@ export default function Founders() {
             </div>
             <div className="founder-quote">
               &ldquo;I know what it means to wait for a drug that doesn&apos;t serve you. That&apos;s not an
-              abstract problem for me — it&apos;s Tuesday.&rdquo;
+              abstract problem for me.&rdquo;
             </div>
           </div>
 
@@ -29,9 +29,7 @@ export default function Founders() {
             <div className="founder-name">Pamilerin Idowu</div>
             <div className="founder-role">CTO · Co-founder</div>
             <div className="founder-bio">
-              Full-stack bioinformatics engineer and the technical architect of Syklomics&apos; platform.
-              Pamilerin leads all engineering — from the multi-omics pipeline to the knowledge graph and
-              model development.
+              Technical architect at Syklomics with over a decade of experience as a full-stack software engineer and a strong data engineering background. Pamilerin leads engineering across the entire platform — building the multi-omics data pipeline, the disease knowledge graph, and the AI models that surface drug candidates, alongside the application layer that makes it usable.
             </div>
             <div className="founder-quote">
               &ldquo;The science is ready. The data infrastructure is buildable. What&apos;s missing is

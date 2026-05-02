@@ -18,8 +18,8 @@ export default function Edge() {
               patients. This dataset does not exist anywhere in the world today.
             </div>
             <div className="diff-vs">
-              Healx, BenevolentAI, Recursion rely on public databases like GEO and UniProt — not
-              disease-focused, lacking clinical depth.
+              Existing platforms rely on public databases like GEO and UniProt — not disease-focused,
+              lacking clinical depth.
             </div>
           </div>
 
@@ -45,7 +45,7 @@ export default function Edge() {
               validated candidates in patients&apos; hands years faster.
             </div>
             <div className="diff-vs">
-              Recursion and BenevolentAI are racing on novel compounds. We&apos;re already on a shorter track.
+              Most platforms are racing on novel compounds. We&apos;re already on a shorter track.
             </div>
           </div>
 

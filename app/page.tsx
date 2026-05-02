@@ -7,7 +7,6 @@ import Platform from "./components/Platform";
 import Science from "./components/Science";
 import Edge from "./components/Edge";
 import Founders from "./components/Founders";
-import Roadmap from "./components/Roadmap";
 import CTA from "./components/CTA";
 import Footer from "./components/Footer";
 
@@ -23,7 +22,6 @@ export default function Page() {
       <Science />
       <Edge />
       <Founders />
-      <Roadmap />
       <CTA />
       <Footer />
     </>
